@@ -9,6 +9,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Failed to connect to DB", error);
+    res.status(500).json({ error: "Database connection failed" });
+  }
+});
+
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
@@ -22,14 +32,18 @@ app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
 });
 
-const port = process.env.PORT || 4000;
-connectDB()
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Backend running at http://localhost:${port}`);
+if (!process.env.VERCEL) {
+  const port = process.env.PORT || 4000;
+  connectDB()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Backend running at http://localhost:${port}`);
+      });
+    })
+    .catch((err) => {
+      console.error("Failed to connect to DB", err);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error("Failed to connect to DB", err);
-    process.exit(1);
-  });
+}
+
+export default app;
