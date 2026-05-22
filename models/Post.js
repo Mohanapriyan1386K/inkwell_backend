@@ -10,6 +10,7 @@ const postSchema = new mongoose.Schema(
     category: { type: String, default: "" },
     content: { type: String, default: "" },
     coverImage: { type: String, default: "" },
+    applyUrl:{type:String,default:""},
     tags: [{ type: String }],
     publishedAt: { type: Date, default: Date.now },
   },

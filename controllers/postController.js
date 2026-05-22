@@ -33,6 +33,7 @@ export async function createPost(req, res) {
       content = "",
       coverImage = "",
       publishedAt,
+      applyUrl="",
       tags = [],
     } = req.body;
 
@@ -61,6 +62,7 @@ export async function createPost(req, res) {
       content,
       coverImage,
       tags: parsedTags,
+      applyUrl,
       publishedAt: publishedAt || new Date(),
     });
 
