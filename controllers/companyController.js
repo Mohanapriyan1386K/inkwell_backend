@@ -87,14 +87,25 @@ export async function updateCompany(req, res) {
   try {
     const { id } = req.params;
 
+    // Validate MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid company ID",
+      });
+    }
+
+    // Update company
     const updatedCompany = await Company.findByIdAndUpdate(
       id,
       req.body,
       {
-        new: true,
+        new: true, // return updated document
+        runValidators: true, // apply schema validations
       }
     );
 
+    // If company not found
     if (!updatedCompany) {
       return res.status(404).json({
         success: false,
@@ -107,6 +118,7 @@ export async function updateCompany(req, res) {
       message: "Company updated successfully",
       data: updatedCompany,
     });
+
   } catch (err) {
     console.log(err);
 
@@ -119,9 +131,18 @@ export async function updateCompany(req, res) {
 
 
 
+import mongoose from "mongoose";
+
 export async function deleteCompany(req, res) {
   try {
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid company ID",
+      });
+    }
 
     const deletedCompany = await Company.findByIdAndDelete(id);
 
