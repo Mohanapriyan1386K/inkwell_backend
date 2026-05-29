@@ -56,12 +56,13 @@ export async function getSingleCompany(req, res) {
 
 export async function createCompany(req, res) {
   try {
-    const { companyname, location, coverImage } = req.body;
+    const { companyname, location, coverImage, siteLink } = req.body;
 
     const newCompany = await Company.create({
       companyname,
       location,
       coverImage,
+      siteLink,
     });
 
     res.status(201).json({
