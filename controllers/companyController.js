@@ -2,19 +2,27 @@
 
 import Company from "../models/Company.js";
 
-
 // ================= GET ALL COMPANY =================
-
 export async function getCompany(req, res) {
   try {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
+    const search = req.query.search || "";
 
     const skip = (page - 1) * limit;
 
-    const totalCompanies = await Company.countDocuments();
+    const filter = search
+      ? {
+          $or: [
+            { companyname: { $regex: search, $options: "i" } },
+            { location: { $regex: search, $options: "i" } },
+          ],
+        }
+      : {};
 
-    const companies = await Company.find()
+    const totalCompanies = await Company.countDocuments(filter);
+
+    const companies = await Company.find(filter)
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
@@ -38,7 +46,6 @@ export async function getCompany(req, res) {
     });
   }
 }
-
 
 // ================= GET SINGLE COMPANY =================
 
@@ -66,7 +73,6 @@ export async function getSingleCompany(req, res) {
     });
   }
 }
-
 
 // ================= CREATE COMPANY =================
 
@@ -96,7 +102,6 @@ export async function createCompany(req, res) {
   }
 }
 
-
 // ================= UPDATE COMPANY =================
 
 export async function updateCompany(req, res) {
@@ -112,14 +117,10 @@ export async function updateCompany(req, res) {
     }
 
     // Update company
-    const updatedCompany = await Company.findByIdAndUpdate(
-      id,
-      req.body,
-      {
-        new: true, // return updated document
-        runValidators: true, // apply schema validations
-      }
-    );
+    const updatedCompany = await Company.findByIdAndUpdate(id, req.body, {
+      new: true, // return updated document
+      runValidators: true, // apply schema validations
+    });
 
     // If company not found
     if (!updatedCompany) {
@@ -134,7 +135,6 @@ export async function updateCompany(req, res) {
       message: "Company updated successfully",
       data: updatedCompany,
     });
-
   } catch (err) {
     console.log(err);
 
@@ -144,8 +144,6 @@ export async function updateCompany(req, res) {
     });
   }
 }
-
-
 
 import mongoose from "mongoose";
 
