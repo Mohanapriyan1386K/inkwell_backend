@@ -1,20 +1,27 @@
 import Post from "../models/Post.js";
 import { slugify } from "../utils/slugify.js";
 
+function escapeRegex(value = "") {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 export async function getPosts(req, res) {
   try {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
-    const search = req.query.search || "";
+    const search = String(req.query.search || "").trim();
+    const searchRegex = search ? new RegExp(escapeRegex(search), "i") : null;
 
     const skip = (page - 1) * limit;
 
-    const filter = search
+    const filter = searchRegex
       ? {
           $or: [
-            { title: { $regex: search, $options: "i" } },
-            { excerpt: { $regex: search, $options: "i" } },
-            { author: { $regex: search, $options: "i" } },
+            { title: searchRegex },
+            { excerpt: searchRegex },
+            { author: searchRegex },
+            { category: searchRegex },
+            { tags: searchRegex },
           ],
         }
       : {};

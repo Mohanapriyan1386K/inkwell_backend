@@ -11,6 +11,7 @@ const jobSchema = new mongoose.Schema(
     category: { type: String, default: "" },
     description: { type: String, default: "" },
     applyUrl: { type: String, default: "" },
+    skills: [{ type: String }],
     postedAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
