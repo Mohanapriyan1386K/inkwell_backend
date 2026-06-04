@@ -17,6 +17,15 @@ function parseSkills(skills) {
   return [];
 }
 
+function normalizeDescription(description) {
+  if (description == null) {
+    return "";
+  }
+
+  const value = String(description);
+  return value === "<p><br></p>" ? "" : value;
+}
+
 export async function getJobs(req, res) {
   try {
     const page = Number(req.query.page) || 1;
@@ -113,7 +122,7 @@ export async function createJob(req, res) {
       experience,
       salary,
       category,
-      description,
+      description: normalizeDescription(description),
       applyUrl,
       skills: parsedSkills,
       postedAt: postedAt || new Date(),
@@ -130,6 +139,10 @@ export async function createJob(req, res) {
 export async function updateJob(req, res) {
   try {
     const payload = { ...req.body };
+
+    if ("description" in payload) {
+      payload.description = normalizeDescription(payload.description);
+    }
 
     if ("skills" in payload) {
       payload.skills = parseSkills(payload.skills);
