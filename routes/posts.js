@@ -1,5 +1,5 @@
 import express from "express";
-import { getPosts, getPostBySlug, createPost, updatePost, deletePost } from "../controllers/postController.js";
+import { getPosts, getPostBySlug, createPost, updatePost, deletePost, incrementClickCount } from "../controllers/postController.js";
 import { validatePost } from "../middleware/validateRequest.js";
 
 const router = express.Router();
@@ -9,5 +9,6 @@ router.get("/:slug", getPostBySlug);
 router.post("/", validatePost, createPost);
 router.put("/:slug", updatePost);
 router.delete("/:slug", deletePost);
+router.post("/:slug/click", incrementClickCount);
 
 export default router;
