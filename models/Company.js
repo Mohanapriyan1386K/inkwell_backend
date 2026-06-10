@@ -18,7 +18,7 @@ const companySchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-
+    clickCount: { type: Number, default: 0 } ,
     siteLink: {
       type: String,
       default: "",
@@ -28,7 +28,6 @@ const companySchema = new mongoose.Schema(
   {
     timestamps: true,
   },
-  { clickCount: { type: Number, default: 0 } }
 );
 
 const Company = mongoose.model("Company", companySchema);
