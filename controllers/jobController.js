@@ -89,6 +89,23 @@ export async function getJobBySlug(req, res) {
   }
 }
 
+
+
+export async function incrementClickCount(req, res) {
+  try {
+    const job = await Job.findOneAndUpdate(
+      { slug: req.params.slug },
+      { $inc: { clickCount: 1 } },
+      { new: true }
+    );
+    if (!job) return res.status(404).json({ error: "Job not found" });
+    res.json(job);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 export async function createJob(req, res) {
   try {
     const {

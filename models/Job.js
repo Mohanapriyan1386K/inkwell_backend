@@ -13,6 +13,7 @@ const jobSchema = new mongoose.Schema(
     applyUrl: { type: String, default: "" },
     skills: [{ type: String }],
     postedAt: { type: Date, default: Date.now },
+    clickCount: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
