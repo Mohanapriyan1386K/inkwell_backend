@@ -55,6 +55,22 @@ export async function getCompany(req, res) {
   }
 }
 
+export async function clickCompany(req, res) {
+  try {
+    const company = await Company.findById(req.params.id);
+    if (!company) {
+      return res.status(404).json({ error: "Company not found" });
+    }
+    company.clickCount = (company.clickCount || 0) + 1;
+    await company.save();
+    res.json(company);
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 // ================= GET SINGLE COMPANY =================
 
 export async function getSingleCompany(req, res) {

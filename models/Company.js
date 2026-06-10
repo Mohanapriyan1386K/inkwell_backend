@@ -28,6 +28,7 @@ const companySchema = new mongoose.Schema(
   {
     timestamps: true,
   },
+  { clickCount: { type: Number, default: 0 } }
 );
 
 const Company = mongoose.model("Company", companySchema);
