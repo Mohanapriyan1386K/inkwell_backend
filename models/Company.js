@@ -23,6 +23,7 @@ const companySchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    companytype: { type: String, default: "" },
   },
   {
     timestamps: true,

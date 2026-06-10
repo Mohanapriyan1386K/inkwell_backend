@@ -6,6 +6,7 @@ const postSchema = new mongoose.Schema(
     title: { type: String, required: true },
     excerpt: { type: String, default: "" },
     author: { type: String, default: "" },
+    clickCount: { type: Number, default: 0 },
     authorBio: { type: String, default: "" },
     category: { type: String, default: "" },
     content: { type: String, default: "" },
