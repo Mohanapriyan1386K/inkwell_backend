@@ -10,25 +10,14 @@ import {
   deleteCompany,
   clickCompany
 } from "../controllers/companyController.js";
+import { authMiddleware } from "../middleware/Authmiddelware.js";
 
 const router = express.Router();
-
-
-// GET ALL
 router.get("/", getCompany);
-
-
-// GET SINGLE
 router.get("/:id", getSingleCompany);
-
-// CREATE
-router.post("/", createCompany);
-
-// UPDATE
-router.put("/:id", updateCompany);
-// CLICK
+router.post("/", authMiddleware, createCompany);
+router.put("/:id", authMiddleware, updateCompany);
 router.post("/:id", clickCompany);
-// DELETE
-router.delete("/:id", deleteCompany);
+router.delete("/:id", authMiddleware, deleteCompany);
 
 export default router;
