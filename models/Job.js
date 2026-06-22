@@ -76,9 +76,9 @@ const jobSchema = new mongoose.Schema(
     postedAt: { type: Date, default: Date.now },
     clickCount: { type: Number, default: 0 },
     role: {
-      type: [String],
-      enum: DEVELOPER_ROLES,
+      type: String,
       required: true,
+      default: "",
     }
   },
   { timestamps: true }
