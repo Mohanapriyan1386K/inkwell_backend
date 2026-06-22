@@ -4,15 +4,15 @@ import bcrypt from "bcryptjs";
 
 export async function Signup(req, res) {
     try {
-        const { name, email, password, role } = req.body;
+        const { name, Email, password, role } = req.body;
 
 
-        const existingUser = await Auth.findOne({ Email: email });
+        const existingUser = await Auth.findOne({ Email });
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
 
-        if (!name || !email || !password) {
+        if (!name || !Email || !password) {
             return res.status(400).json({ error: "All fields are required" });
         }
 
