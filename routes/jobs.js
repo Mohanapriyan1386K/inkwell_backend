@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get("/", getJobs);
 router.get("/:slug", getJobBySlug);
-router.post("/", authMiddleware, validateJob, createJob);
-router.put("/:slug", authMiddleware, updateJob);
-router.delete("/:slug", authMiddleware, deleteJob);
+router.post("/", validateJob, createJob);
+router.put("/:slug", updateJob);
+router.delete("/:slug", deleteJob);
 router.post("/:slug/click", incrementClickCount);
 export default router;

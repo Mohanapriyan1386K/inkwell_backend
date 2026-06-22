@@ -4,8 +4,8 @@ import { authMiddleware } from "../middleware/Authmiddelware.js";
 
 const router = express.Router();
 
-router.post("/", authMiddleware, CreateJobrole);
+router.post("/", CreateJobrole);
 router.get("/", getJobRole);
-router.put("/:id", authMiddleware, updaterole);
-router.delete("/:id", authMiddleware, delRole);
+router.put("/:id", updaterole);
+router.delete("/:id", delRole);
 export default router;
