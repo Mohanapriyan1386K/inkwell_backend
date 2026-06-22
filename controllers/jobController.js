@@ -37,17 +37,17 @@ export async function getJobs(req, res) {
 
     const filter = searchRegex
       ? {
-          $or: [
-            { title: searchRegex },
-            { company: searchRegex },
-            { location: searchRegex },
-            { experience: searchRegex },
-            { salary: searchRegex },
-            { category: searchRegex },
-            { description: searchRegex },
-            { skills: searchRegex },
-          ],
-        }
+        $or: [
+          { title: searchRegex },
+          { company: searchRegex },
+          { location: searchRegex },
+          { experience: searchRegex },
+          { salary: searchRegex },
+          { category: searchRegex },
+          { description: searchRegex },
+          { skills: searchRegex },
+        ],
+      }
       : {};
 
     const [jobs, total] = await Promise.all([
@@ -118,6 +118,7 @@ export async function createJob(req, res) {
       description = "",
       applyUrl = "",
       skills = [],
+      role = "",
       postedAt,
     } = req.body;
 
@@ -142,6 +143,7 @@ export async function createJob(req, res) {
       description: normalizeDescription(description),
       applyUrl,
       skills: parsedSkills,
+      role,
       postedAt: postedAt || new Date(),
     });
 

@@ -1,5 +1,66 @@
 import mongoose from "mongoose";
 
+
+
+const DEVELOPER_ROLES = [
+  "Frontend Developer",
+  "Backend Developer",
+  "Full Stack Developer",
+  "React Developer",
+  "Angular Developer",
+  "Vue.js Developer",
+  "Node.js Developer",
+  "MERN Stack Developer",
+  "MEAN Stack Developer",
+  "Java Developer",
+  "Spring Boot Developer",
+  "Python Developer",
+  "Django Developer",
+  "Flask Developer",
+  "PHP Developer",
+  "Laravel Developer",
+  ".NET Developer",
+  "C# Developer",
+  "Ruby on Rails Developer",
+  "Go Developer",
+  "Rust Developer",
+  "C Developer",
+  "C++ Developer",
+  "Mobile App Developer",
+  "Android Developer",
+  "iOS Developer",
+  "Flutter Developer",
+  "React Native Developer",
+  "Game Developer",
+  "Embedded Systems Developer",
+  "DevOps Engineer",
+  "Cloud Engineer",
+  "Site Reliability Engineer",
+  "Data Engineer",
+  "Data Scientist",
+  "Machine Learning Engineer",
+  "AI Engineer",
+  "Generative AI Engineer",
+  "Blockchain Developer",
+  "Web3 Developer",
+  "Cybersecurity Engineer",
+  "QA Engineer",
+  "Automation Test Engineer",
+  "Manual Test Engineer",
+  "Software Development Engineer in Test (SDET)",
+  "Database Developer",
+  "ERP Developer",
+  "Salesforce Developer",
+  "SAP Developer",
+  "UI Developer",
+  "UI/UX Developer",
+  "WordPress Developer",
+  "Shopify Developer",
+  "CRM Developer",
+  "Software Engineer",
+  "Software Developer",
+];
+
 const jobSchema = new mongoose.Schema(
   {
     slug: { type: String, required: true, unique: true },
@@ -14,6 +75,11 @@ const jobSchema = new mongoose.Schema(
     skills: [{ type: String }],
     postedAt: { type: Date, default: Date.now },
     clickCount: { type: Number, default: 0 },
+    role: {
+      type: [String],
+      enum: DEVELOPER_ROLES,
+      required: true,
+    }
   },
   { timestamps: true }
 );
