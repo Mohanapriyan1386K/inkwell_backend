@@ -17,7 +17,7 @@ export async function Signup(req, res) {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await Auth.create({ name, email, password: hashedPassword, role });
+        const user = await Auth.create({ name, Email, password: hashedPassword, role });
         res.status(201).json(user);
     } catch (err) {
         res.status(500).json({ error: err.message });
