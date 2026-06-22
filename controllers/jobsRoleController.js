@@ -1,4 +1,4 @@
-import JobRole from "../models/JobRole";
+import JobRole from "../models/JobRole.js";
 
 export async function CreateJobrole(req, res) {
     try {
