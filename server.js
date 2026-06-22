@@ -4,8 +4,6 @@ import postsRouter from "./routes/posts.js";
 import jobsRouter from "./routes/jobs.js";
 import companyRoutes from "./routes/companyRoutes.js"
 import categoriesRouter from "./routes/categories.js";
-import authRoutes from "./routes/auth.js";
-import JobRoleRoutes from "./routes/Jobrole.js";
 import connectDB from "./db.js";
 
 const app = express();
@@ -31,8 +29,6 @@ app.use("/api/stories", postsRouter);
 app.use("/api/jobs", jobsRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/company", companyRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/jobsRole", JobRoleRoutes)
 app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
 });
