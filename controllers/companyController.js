@@ -75,7 +75,7 @@ export async function clickCompany(req, res) {
 
 export async function getSingleCompany(req, res) {
   try {
-    const company = await Company.findById(req.params.id);
+    const company = await Company.findOne(req.params.companyname);
 
     if (!company) {
       return res.status(404).json({
@@ -97,6 +97,8 @@ export async function getSingleCompany(req, res) {
     });
   }
 }
+
+
 
 // ================= CREATE COMPANY =================
 
