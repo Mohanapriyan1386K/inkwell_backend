@@ -75,9 +75,7 @@ export async function clickCompany(req, res) {
 
 export async function getSingleCompany(req, res) {
   try {
-    const company = await Company.findOne({
-      companyname: req.params.companyname,
-    });
+    const company = await Company.findById(req.params.id);
 
     if (!company) {
       return res.status(404).json({
@@ -91,11 +89,11 @@ export async function getSingleCompany(req, res) {
       data: company,
     });
   } catch (err) {
-    console.error(err);
+    console.log(err);
 
     res.status(500).json({
       success: false,
-      message: err.message,
+      message: "Server Error",
     });
   }
 }
