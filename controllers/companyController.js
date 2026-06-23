@@ -75,7 +75,9 @@ export async function clickCompany(req, res) {
 
 export async function getSingleCompany(req, res) {
   try {
-    const company = await Company.findOne(req.params.companyname);
+    const company = await Company.findOne({
+      companyname: req.params.companyname,
+    });
 
     if (!company) {
       return res.status(404).json({
@@ -89,16 +91,14 @@ export async function getSingleCompany(req, res) {
       data: company,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
 
     res.status(500).json({
       success: false,
-      message: "Server Error",
+      message: err.message,
     });
   }
 }
-
-
 
 // ================= CREATE COMPANY =================
 
