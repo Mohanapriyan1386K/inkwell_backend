@@ -14,6 +14,11 @@ const companySchema = new mongoose.Schema(
       default: "",
     },
 
+    jobs:{
+       type:[],
+       default:"",
+    },
+
     coverImage: {
       type: String,
       default: "",
