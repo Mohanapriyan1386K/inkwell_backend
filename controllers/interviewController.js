@@ -127,65 +127,61 @@ export const getSingleRole = async (req, res) => {
 // 4. Add Question to Role
 
 export const addQuestion = async (req, res) => {
-
     try {
-
         const { role } = req.params;
 
-        const { question, answer, difficulty } = req.body;
+        let questionsToAdd = [];
+
+        // Multiple questions
+        if (Array.isArray(req.body.questions)) {
+            questionsToAdd = req.body.questions;
+        }
+        // Single question
+        else if (req.body.question) {
+            questionsToAdd = [
+                {
+                    question: req.body.question,
+                    answer: req.body.answer,
+                    difficulty: req.body.difficulty,
+                },
+            ];
+        } else {
+            return res.status(400).json({
+                success: false,
+                message: "Question data is required",
+            });
+        }
 
         const interview = await Interview.findOneAndUpdate(
-
             { role },
-
             {
-
                 $push: {
-
-                    questions: { question, answer, difficulty },
-
+                    questions: {
+                        $each: questionsToAdd,
+                    },
                 },
-
             },
-
             { new: true }
-
         );
 
         if (!interview) {
-
             return res.status(404).json({
-
                 success: false,
-
                 message: "Role not found",
-
             });
-
         }
 
         res.status(200).json({
-
             success: true,
-
-            message: "Question added successfully",
-
+            message: `${questionsToAdd.length} question(s) added successfully`,
             data: interview,
-
         });
-
     } catch (error) {
-
         res.status(500).json({
-
             success: false,
-
             message: error.message,
-
         });
-
     }
-
 };
 
 // 5. Update Question
