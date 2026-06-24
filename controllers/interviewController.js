@@ -1,4 +1,4 @@
-import Interview from "../models/QuestionSchema";
+import Interview from "../models/QuestionSchema.js";
 
 // 1. Create Role
 
