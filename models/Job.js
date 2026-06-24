@@ -75,11 +75,6 @@ const jobSchema = new mongoose.Schema(
     skills: [{ type: String }],
     postedAt: { type: Date, default: Date.now },
     clickCount: { type: Number, default: 0 },
-    role: {
-      type: String,
-      required: true,
-      default: "",
-    }
   },
   { timestamps: true }
 );
