@@ -9,12 +9,6 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
 
-    slug: {
-      type: String,
-      unique: true,
-      required: true,
-    },
-
     location: {
       type: String,
       default: "",
