@@ -35,7 +35,7 @@ app.use("/api/categories", categoriesRouter);
 app.use("/api/company", companyRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobrole", jobroleRoutes);
-app.use("/api/interview", interviewRoutes);
+app.use("/api/interviews", interviewRoutes);
 app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
 });
