@@ -17,7 +17,6 @@ router.get("/", getCompany);
 router.get("/:companyname", getSingleCompany);
 router.post("/", createCompany);
 router.put("/:id", updateCompany);
-router.post("/:id", clickCompany);
+router.post("/:companyname", clickCompany);
 router.delete("/:id", deleteCompany);
-
 export default router;

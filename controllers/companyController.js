@@ -57,7 +57,7 @@ export async function getCompany(req, res) {
 
 export async function clickCompany(req, res) {
   try {
-    const company = await Company.findById(req.params.id);
+    const company = await Company.findOne({ companyname: req.params.companyname });
     if (!company) {
       return res.status(404).json({ error: "Company not found" });
     }
