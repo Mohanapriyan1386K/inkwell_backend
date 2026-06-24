@@ -45,4 +45,6 @@ const InterviewSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.model("Interview", InterviewSchema);
+const Interview = mongoose.model("Interview", InterviewSchema);
+
+export default Interview;

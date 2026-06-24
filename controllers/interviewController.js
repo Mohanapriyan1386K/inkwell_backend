@@ -28,7 +28,7 @@ export const createRole = async (req, res) => {
 
             success: true,
 
-            message: "Role created successfully",
+            message: "Role created successfullys",
 
             data: interview,
 
@@ -96,7 +96,7 @@ export const getSingleRole = async (req, res) => {
 
                 success: false,
 
-                message: "Role not found",
+                message: "Role not founds",
 
             });
 

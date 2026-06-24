@@ -20,7 +20,7 @@ import {
 
 const router = express.Router();
 
-// Role CRUD
+// Role CRUDsss
 
 router.post("/role", createRole);
 
