@@ -153,7 +153,7 @@ export const addQuestion = async (req, res) => {
         }
 
         const interview = await Interview.findByIdAndUpdate(
-            { id },
+            { _id: id },
             {
                 $push: {
                     questions: {
