@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "node:os";
 
 
 
@@ -75,6 +76,7 @@ const jobSchema = new mongoose.Schema(
     skills: [{ type: String }],
     postedAt: { type: Date, default: Date.now },
     clickCount: { type: Number, default: 0 },
+    interview_questions: { type: String, default: "mern" }
   },
   { timestamps: true }
 );
