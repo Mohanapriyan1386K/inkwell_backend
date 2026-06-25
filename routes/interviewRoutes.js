@@ -32,7 +32,7 @@ router.delete("/role/:role", deleteRole);
 
 // Question CRUD
 
-router.post("/role/:role/question", addQuestion);
+router.post("/role/:id/question", addQuestion);
 
 router.put("/role/:role/question/:questionId", updateQuestion);
 

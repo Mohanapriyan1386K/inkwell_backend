@@ -128,7 +128,7 @@ export const getSingleRole = async (req, res) => {
 
 export const addQuestion = async (req, res) => {
     try {
-        const { role } = req.params;
+        const { id } = req.params;
 
         let questionsToAdd = [];
 
@@ -152,8 +152,8 @@ export const addQuestion = async (req, res) => {
             });
         }
 
-        const interview = await Interview.findOneAndUpdate(
-            { role },
+        const interview = await Interview.findByIdAndUpdate(
+            { id },
             {
                 $push: {
                     questions: {
